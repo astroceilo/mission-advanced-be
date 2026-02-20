@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/astroceilo/mission-intermediete-be/issues"
   },
-  "homepage": "https://github.com/astroceilo/mission-intermediete-be#readme"
+  "homepage": "https://github.com/astroceilo/mission-intermediete-be#readme",
+  "dependencies": {
+    "mysql2": "^3.17.3"
+  }
 }
