@@ -3,7 +3,7 @@ import conn from '../database/connection.js';
 // get all users
 export const getAllUsers = async () => {
     const [rows] = await conn.query(
-        'SELECT id, full_name, email, gender, phone, role, status, created_at FROM users'
+        'SELECT id, full_name, email, gender, phone, role, status, created_at, updated_at FROM users'
     );
     return rows;
 };
@@ -11,7 +11,7 @@ export const getAllUsers = async () => {
 // get user by id
 export const getUserById = async (id) => {
     const [rows] = await conn.query(
-        'SELECT id, full_name, email, gender, phone, role, status, created_at FROM users WHERE id = ?',
+        'SELECT id, full_name, email, gender, phone, role, status, created_at, updated_at FROM users WHERE id = ?',
         [id]
     );
     return rows[0];
@@ -20,7 +20,7 @@ export const getUserById = async (id) => {
 // get user by email
 export const getUserByEmail = async (email) => {
     const [rows] = await conn.query(
-        'SELECT id, full_name, email, gender, phone, role, status, created_at FROM users WHERE email = ?',
+        'SELECT id, full_name, email, gender, phone, role, status, created_at, updated_at FROM users WHERE email = ?',
         [email]
     );
     return rows[0];
@@ -45,29 +45,24 @@ export const createUser = async (data) => {
         [full_name, email, password, gender, phone, role, status]
     );
 
-    return {
-        id: result.insertId,
-        ...data,
-    };
+    return getUserById(result.insertId);
 };
 
 // update user
 export const updateUser = async (id, data) => {
-    const {
-        full_name,
-        email,
-        password,
-        gender,
-        phone,
-        role,
-        status,
-    } = data;
+    const fields = [];
+    const values = [];
+
+    for (const key in data) {
+        fields.push(`${key} = ?`);
+        values.push(data[key]);
+    }
+
+    if (fields.length === 0) return getUserById(id);
 
     await conn.query(
-        `UPDATE users
-        SET full_name = ?, email = ?, password = ?, gender = ?, phone = ?, role = ?, status = ?
-        WHERE id = ?`,
-        [full_name, email, password, gender, phone, role, status, id]
+        `UPDATE users SET ${fields.join(', ')} WHERE id = ?`,
+        [...values, id]
     );
 
     return getUserById(id);
