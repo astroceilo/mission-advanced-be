@@ -11,6 +11,8 @@ app.use("/api/auth", authRoutes);
 
 app.use("/api/courses", courseRoutes);
 
+app.use("/uploads", express.static("uploads"));
+
 app.get("/", (req, res) => {
   res.send("Server jalan 🚀");
 });
