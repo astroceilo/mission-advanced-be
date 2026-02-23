@@ -17,5 +17,16 @@
   "bugs": {
     "url": "https://github.com/astroceilo/mission-advanced-be/issues"
   },
-  "homepage": "https://github.com/astroceilo/mission-advanced-be#readme"
+  "homepage": "https://github.com/astroceilo/mission-advanced-be#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mysql2": "^3.17.5",
+    "sequelize": "^6.37.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
 }
