@@ -1,6 +1,9 @@
 import dotenv from "dotenv";
 dotenv.config();
 
+import { validateEnv } from "./envValidator.js";
+validateEnv();
+
 import { Sequelize } from "sequelize";
 
 const sequelize = new Sequelize(
@@ -11,6 +14,7 @@ const sequelize = new Sequelize(
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: "mysql",
+    logging: process.env.NODE_ENV === "development" ? console.log : false,
   }
 );
 

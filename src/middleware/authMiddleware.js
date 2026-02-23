@@ -1,12 +1,11 @@
-import jwt from "jsonwebtoken";
-
 export const verifyToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
-    return res.status(401).json({
+    return sendResponse(res, {
       success: false,
-      message: "Token tidak ada"
+      message: "Token tidak ada",
+      status: 401,
     });
   }
 
@@ -16,10 +15,24 @@ export const verifyToken = (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded;
     next();
-  } catch (error) {
-    return res.status(401).json({
+  } catch {
+    return sendResponse(res, {
       success: false,
-      message: "Token tidak valid"
+      message: "Token tidak valid",
+      status: 401,
     });
   }
+};
+
+export const authorize = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return sendResponse(res, {
+        success: false,
+        message: "Forbidden",
+        status: 403,
+      });
+    }
+    next();
+  };
 };

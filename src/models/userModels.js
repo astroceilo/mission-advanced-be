@@ -11,6 +11,10 @@ const User = sequelize.define("User", {
     allowNull: false,
     unique: true,
   },
+  email_verification_token: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
   email_verified_at: {
     type: DataTypes.DATE,
     allowNull: true,
