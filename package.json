@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "seed": "node src/seed.js",
     "dev": "nodemon src/app.js  --watch src/ --watch package.json --watch .env"
   },
   "repository": {
@@ -26,7 +27,8 @@
     "jsonwebtoken": "^9.0.3",
     "mysql2": "^3.17.5",
     "nodemailer": "^8.0.1",
-    "sequelize": "^6.37.7"
+    "sequelize": "^6.37.7",
+    "slugify": "^1.6.6"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
