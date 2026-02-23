@@ -2,6 +2,7 @@ import express from "express";
 import sequelize from "./config/database.js";
 import authRoutes from "./routes/authRoutes.js";
 import courseRoutes from "./routes/courseRoutes.js";
+import multer from "multer";
 
 const app = express();
 
@@ -12,6 +13,20 @@ app.use("/api/auth", authRoutes);
 app.use("/api/courses", courseRoutes);
 
 app.use("/uploads", express.static("uploads"));
+
+app.use((err, req, res, next) => {
+  if (err instanceof multer.MulterError) {
+    return res.status(400).json({
+      success: false,
+      message: err.message,
+    });
+  }
+
+  return res.status(500).json({
+    success: false,
+    message: err.message,
+  });
+});
 
 app.get("/", (req, res) => {
   res.send("Server jalan 🚀");
