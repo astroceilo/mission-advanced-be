@@ -1,5 +1,5 @@
 {
-  "name": "intermediete-be-2a",
+  "name": "advanced-be-a",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -11,16 +11,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/astroceilo/mission-intermediete-be.git"
+    "url": "git+https://github.com/astroceilo/mission-advanced-be.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "bugs": {
-    "url": "https://github.com/astroceilo/mission-intermediete-be/issues"
+    "url": "https://github.com/astroceilo/mission-advanced-be/issues"
   },
-  "homepage": "https://github.com/astroceilo/mission-intermediete-be#readme",
+  "homepage": "https://github.com/astroceilo/mission-advanced-be#readme",
   "dependencies": {
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
