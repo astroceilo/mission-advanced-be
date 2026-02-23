@@ -1,15 +1,26 @@
+import jwt from "jsonwebtoken";
+import { sendResponse } from "../utils/response.js";
+
 export const verifyToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
 
-  if (!authHeader) {
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return sendResponse(res, {
       success: false,
-      message: "Token tidak ada",
+      message: "Token not found",
       status: 401,
     });
   }
 
   const token = authHeader.split(" ")[1];
+
+  if (!token) {
+    return sendResponse(res, {
+      success: false,
+      message: "Token malformed",
+      status: 401,
+    });
+  }
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -18,7 +29,7 @@ export const verifyToken = (req, res, next) => {
   } catch {
     return sendResponse(res, {
       success: false,
-      message: "Token tidak valid",
+      message: "Invalid token",
       status: 401,
     });
   }

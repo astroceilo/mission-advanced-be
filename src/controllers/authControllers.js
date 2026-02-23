@@ -32,7 +32,7 @@ export const register = async (req, res) => {
       password: hashedPassword,
     });
 
-    const verifyUrl = `http://localhost:3000/api/auth/verify?token=${emailVerificationToken}`;
+    const verifyUrl = `http://localhost:3000/api/auth/verify-email?token=${emailVerificationToken}`;
 
     try {
       await sendEmail(
